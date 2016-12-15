@@ -1,0 +1,21 @@
+---
+- name: make percona download folder
+  file: path={{ item }}
+        state=directory
+        recurse=yes
+        owner={{ user }}
+        group={{ user }}
+        mode=0755
+
+  with_items:
+  - "{{ percona_download }}"
+
+
+- name: download percona release deb ubuntu
+  get_url: url=https://repo.percona.com/apt/percona-release_{{ release_deb_version }}.{{ ubuntu_version_name }}_all.deb
+           dest={{ percona_download }}percona-release_{{ release_deb_version }}.{{ ubuntu_version_name }}_all.deb
+           force=no
+
+
+- name: install percona release deb ubuntu
+  command: dpkg -i percona-release_{{ release_deb_version }}.{{ ubuntu_version_name }}_all.deb chdir={{ percona_download }} creates=/etc/apt/sources.list.d/percona-release.list

@@ -1,0 +1,45 @@
+---
+### The maximum size of one packet or any generated/intermediate string, or any parameter sent by the mysql_stmt_send_long_data() C API function.
+#
+# Memory: 1GB = 16M
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_max_allowed_packet
+#
+# Default: 16M
+#
+rds_max_allowed_packet: "16M"
+
+
+### The maximum permitted number of simultaneous client connections. See https://dev.mysql.com/doc/refman/5.6/en/too-many-connections.html for more information.
+#
+## 512MB = ?
+## 1GB = 500
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_max_connections
+#
+# Default: 151
+#
+rds_max_connections: "500"
+
+
+### The number of table definitions (from .frm files) that can be stored in the definition cache. If you use a large number of tables, you can create a large table definition cache to speed up opening of tables. The table definition cache takes less space and does not use file descriptors, unlike the normal table cache. The minimum value is 400. 
+#
+## 512MB = ?
+## 1GB = 1024
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_table_definition_cache
+#
+# Default: Autosized. The default value is based on the following formula, capped to a limit of 2000: 400 + (table_open_cache / 2) = ?
+#
+rds_table_definition_cache: "1024"
+
+
+### The number of open tables for all threads. Increasing this value increases the number of file descriptors that mysqld requires. You can check whether you need to increase the table cache by checking the Opened_tables status variable. See Section 5.1.6, “Server Status Variables”. If the value of Opened_tables is large and you do not use FLUSH TABLES often (which just forces all tables to be closed and reopened), then you should increase the value of the table_open_cache variable. For more information about the table cache, see Section 8.4.3.1, “How MySQL Opens and Closes Tables”.
+#
+# 1GB = 2048
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_table_open_cache
+#
+# Default: Autosized
+#
+rds_table_open_cache: "2048"

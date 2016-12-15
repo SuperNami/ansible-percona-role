@@ -1,0 +1,16 @@
+---
+# User
+user: root
+#user: vagrant
+ubuntu_version_name: vivid
+debian_version_name: jessie
+
+# Mysql host
+mysql_host: localhost
+
+# Download folder
+percona_download: /opt/downloads/percona/
+
+# Logs
+mysql_error_log: /var/log/mysql/mysql-error.log
+mysql_slow_query_log: /var/log/mysql/mysql-slow.log

@@ -1,0 +1,3 @@
+---
+- name: run tuning primer
+  command: ./tuning-primer.sh chdir={{ percona_download }}

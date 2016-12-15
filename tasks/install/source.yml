@@ -1,0 +1,44 @@
+---
+- name: make percona download folder
+  file: path={{ item }}
+        state=directory
+        recurse=yes
+        owner={{ user }}
+        group={{ user }}
+        mode=0755
+
+  with_items:
+  - "{{ percona_download }}"
+
+
+- name: install percona server compile dependencies
+  apt: pkg={{ item }}
+       state=present
+       update_cache=yes
+
+  with_items:
+  - python-mysqldb
+  - libaio-dev
+  - libncurses5-dev
+
+
+- name: download percona server archive
+  get_url: url=http://www.percona.com/redir/downloads/Percona-Server-{{ percona_version }}/LATEST/source/debian/{{ percona_archive }}
+           dest={{ percona_download }}{{ percona_archive }}
+           force=no
+
+
+- name: unpack percona server archive
+  command: tar xfz {{ percona_archive }} chdir={{ percona_download }} creates={{ percona_download }}{{ percona_folder }}
+
+
+- name: cmake percona server
+  command: cmake . -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_CONFIG=mysql_release -DFEATURE_SET=community -DWITH_EMBEDDED_SERVER=OFF chdir={{ percona_download }}{{ percona_folder }} creates=/usr/local/mysql
+
+
+- name: make percona server
+  command: make chdir={{ percona_download }}{{ percona_folder }}
+
+
+- name: make install percona server
+  command: make install chdir={{ percona_download }}{{ percona_folder }}

@@ -1,0 +1,11 @@
+---
+### Versions
+#
+percona_version: 5.7
+release_deb_version: 0.1-4
+
+# Percona from source
+# http://www.percona.com/downloads/Percona-Server-5.7/LATEST/source/debian/
+#
+percona_folder: percona-server-5.7
+percona_archive: percona-server-5.7

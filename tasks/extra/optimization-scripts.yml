@@ -1,0 +1,23 @@
+---
+- name: make mysql tuner download folder
+  file: path={{ item }}
+        state=directory
+        recurse=yes
+        owner={{ user }}
+        group={{ user }}
+        mode=0755
+
+  with_items:
+  - "{{ percona_download }}"
+
+
+- name: download mysql tuner
+  get_url: url=https://raw.github.com/major/MySQLTuner-perl/master/mysqltuner.pl
+           dest={{ percona_download }}mysqltuner.pl
+           force=yes
+
+
+- name: mysql tuning primer
+  get_url: url=https://launchpad.net/mysql-tuning-primer/trunk/1.6-r1/+download/tuning-primer.sh
+           dest={{ percona_download }}tuning-primer.sh
+           force=yes

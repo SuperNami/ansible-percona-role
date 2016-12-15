@@ -1,0 +1,7 @@
+---
+- name: copy global mysql logrotate
+  template: src=roles/logging/templates/logrotate/mysql.j2
+            dest=/etc/logrotate.d/mysql
+            owner=root
+            group=root
+            mode=0644

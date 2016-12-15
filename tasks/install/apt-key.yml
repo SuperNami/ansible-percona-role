@@ -1,0 +1,5 @@
+---
+- name: install percona apt key to keyring
+  apt_key: keyserver=keys.gnupg.net
+           id=1C4CBDCDCD2EFD2A
+           state=present

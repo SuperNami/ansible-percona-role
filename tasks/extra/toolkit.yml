@@ -1,0 +1,8 @@
+---
+- name: install latest percona toolkit
+  apt: pkg={{ item }}
+       update_cache=yes
+       state=latest
+
+  with_items:
+  - percona-toolkit

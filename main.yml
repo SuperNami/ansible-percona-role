@@ -1,0 +1,14 @@
+---
+- hosts: all
+  user: root
+  become: true
+  tasks:
+  - include: tasks/main.yml
+  handlers:
+  - include: handlers/main.yml
+  vars_files:
+  - vars/local.yml
+  - vars/versions.yml
+  - vars/my.cnf.yml
+  - vars/my.rds.cnf.yml
+  - vars/dev-secrets.yml

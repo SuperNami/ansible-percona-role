@@ -1,0 +1,55 @@
+---
+- include: install/apt-get.yml
+  tags: percona_install_distribution_apt_get
+
+
+- include: install/deb-debian.yml
+  tags: percona_deb_debian
+
+
+- include: install/deb-ubuntu.yml
+  tags: percona_deb_ubuntu
+
+
+- include: install/apt-key.yml
+  tags: percona_install_apt_key
+
+
+- include: install/debian.yml
+  tags: percona_debian_repository
+
+
+- include: install/ubuntu.yml
+  tags: percona_ubuntu_repository
+
+
+- include: install/install.yml
+  tags: percona_install
+
+
+- include: install/source.yml
+  tags: percona_install_source
+
+
+- include: configure/my-cnf.yml
+  tags: percona_configure
+
+
+- include: configure/security.yml
+  tags: percona_configure_security
+
+
+- include: configure/user.yml
+  tags: percona_configure_user
+
+
+- include: extra/toolkit.yml
+  tags: percona_toolkit
+
+
+- include: extra/xtrabackup.yml
+  tags: percona_xtrabackup
+
+
+- include: extra/optimization-scripts.yml
+  tags: mysql_optimization_scripts

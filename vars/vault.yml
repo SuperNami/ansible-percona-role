@@ -1,0 +1,8 @@
+---
+# MySQL user
+vault_db_user:
+vault_db_user_password:
+
+# Root MySQL user
+vault_mysql_root_user:
+vault_mysql_root_password:

@@ -1,0 +1,17 @@
+{{ mysql_error_log }} {
+	rotate 1
+	size 500M
+	create 644 root root
+	missingok
+	notifempty
+	compress
+}
+
+{{ mysql_slow_query_log }} {
+	rotate 1
+	size 500M
+	create 644 root root
+	missingok
+	notifempty
+	compress
+}

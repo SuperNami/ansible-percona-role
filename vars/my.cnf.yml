@@ -1,0 +1,453 @@
+---
+###### General options
+#
+# https://dev.mysql.com/doc/refman/5.6/en/server-options.html
+# https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html
+# https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html
+# https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html
+#
+
+### The port on which mysql listens to
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_port
+#
+# Default: 3306
+#
+mysql_port: "3306"
+
+
+### The socket on which programs can connect to
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_socket
+#
+# Default: /var/run/mysqld/mysqld.sock
+#
+mysql_socket: /var/run/mysqld/mysqld.sock
+
+
+### Use the nice program to set the server's scheduling priority to the given value.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/mysqld-safe.html#option_mysqld_safe_nice
+#
+# Default: 0
+#
+nice: "0"
+
+
+### The location where the process id is recorded
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_pid_file
+#
+# Default: /var/run/mysqld/mysqld.pid
+#
+mysql_pid: /var/run/mysqld/mysqld.pid
+
+
+### Mysqld will run as the mysql user account on the operating system
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_user
+#
+# Default: mysql
+#
+mysql_user: mysql
+
+
+### The MySQL server listens on a single network socket for TCP/IP connections. This socket is bound to a single address, but it is possible for an address to map onto multiple network interfaces.
+#
+## If the address is 0.0.0.0, the server accepts TCP/IP connections on all server host IPv4 interfaces.
+## If the address is a “regular” IPv4 address (such as 127.0.0.1), the server accepts TCP/IP connections only for that particular IPv4 address.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_bind-address
+#
+# Default: 0.0.0.0.
+#
+bind_address: 127.0.0.1
+
+
+### The default storage engine (table type)
+#
+# Link: https://dev.mysql.com/doc/refman/5.1/en/server-system-variables.html#sysvar_storage_engine
+#
+# Default: InnoDB
+#
+default_storage_engine: InnoDB
+
+
+
+###### Directories
+#
+
+### The path to the data directory
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_datadir
+#
+# Default: /var/lib/mysql
+#
+mysql_datadir: /var/lib/mysql
+
+
+### The path to the tmp directory
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_tmpdir
+#
+# Default: /tmp
+#
+tmpdir: /tmp
+
+
+
+
+###### Safety
+#
+
+### The maximum size of one packet or any generated/intermediate string, or any parameter sent by the mysql_stmt_send_long_data() C API function.
+#
+# Memory: 1GB = 16M
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_max_allowed_packet
+#
+# Default: 16M
+#
+max_allowed_packet: "16M"
+
+
+### If more than this many successive connection requests from a host are interrupted without a successful connection, the server blocks that host from further connections. You can unblock blocked hosts by flushing the host cache.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_max_connect_errors
+#
+# Default: 100
+#
+max_connect_errors: "1000000"
+
+
+### The current server SQL mode, which can be set dynamically. See Section 5.1.7, “Server SQL Modes”.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/sql-mode.html
+#
+# Default: The default as of MySQL 5.6.6 is NO_ENGINE_SUBSTITUTION; previously it was an empty string.
+#
+# sql-mode = {{ sql_mode }}
+#
+# sql_mode: STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_AUTO_VALUE_ON_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ONLY_FULL_GROUP_BY
+
+
+### SYSDATE() by default returns the time at which it executes, not the time at which the statement in which it occurs begins executing. This differs from the behavior of NOW(). This option causes SYSDATE() to be an alias for NOW(). For information about the implications for binary logging and replication, see the description for SYSDATE() in Section 12.7, “Date and Time Functions” and for SET TIMESTAMP in Section 5.1.4, “Server System Variables”.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_sysdate-is-now
+#
+# Default: 0
+#
+sysdate_is_now: "1"
+
+
+### In MySQL, the TIMESTAMP data type differs in nonstandard ways from other data types: check link.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_explicit_defaults_for_timestamp
+#
+# Default: 0
+#
+# Generates warning in error log
+#
+explicit_defaults_for_timestamp: "1"
+
+
+### This variable is set from the value of the --skip-name-resolve option. If it is ON, mysqld resolves host names when checking client connections. If OFF, mysqld uses only IP numbers and all Host column values in the grant tables must be IP addresses or localhost. See Section 8.11.5.2, “DNS Lookup Optimization and the Host Cache”.
+#
+# Do not resolve host names when checking client connections. Use only IP addresses. If you use this option, all Host column values in the grant tables must be IP addresses or localhost.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_skip-name-resolve
+#
+# Default: True
+#
+skip_name_resolve: skip-name-resolve
+
+
+
+###### Limits
+#
+
+### The maximum permitted number of simultaneous client connections. See https://dev.mysql.com/doc/refman/5.6/en/too-many-connections.html for more information.
+#
+## 512MB = ?
+## 1GB = 500
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_max_connections
+#
+# Default: 151
+#
+max_connections: "500"
+
+
+
+### How many threads the server should cache for reuse. When a client disconnects, the client's threads are put in the cache if there are fewer than thread_cache_size threads there. Requests for threads are satisfied by reusing threads taken from the cache if possible, and only when the cache is empty is a new thread created. This variable can be increased to improve performance if you have a lot of new connections. Normally, this does not provide a notable performance improvement if you have a good thread implementation.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_thread_cache_size
+#
+# Default: The default value is based on the following formula, capped to a limit of 100: 8 + (max_connections / 100) = ?
+#
+thread_cache_size: "50"
+
+
+### The number of files that the operating system permits mysqld to open. The value of this variable at runtime is the real value permitted by the system and might be different from the value you specify at server startup. The value is 0 on systems where MySQL cannot change the number of open files.
+#
+# The effective open_files_limit value is based on the value specified at system startup (if any) and the values of max_connections and table_open_cache, using these formulas:
+#
+## 1) 10 + max_connections + (table_open_cache * 2)
+## 2) max_connections * 5
+## 3) open_files_limit value specified at startup, 5000 if none
+#
+# The server attempts to obtain the number of file descriptors using the maximum of those three values. If that many descriptors cannot be obtained, the server attempts to obtain as many as the system will permit.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_open_files_limit
+#
+# Default: Autosized
+#
+open_files_limit: "65535"
+
+
+### The number of table definitions (from .frm files) that can be stored in the definition cache. If you use a large number of tables, you can create a large table definition cache to speed up opening of tables. The table definition cache takes less space and does not use file descriptors, unlike the normal table cache. The minimum value is 400.
+#
+## 512MB = ?
+## 1GB = 1024
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_table_definition_cache
+#
+# Default: Autosized. The default value is based on the following formula, capped to a limit of 2000: 400 + (table_open_cache / 2) = ?
+#
+table_definition_cache: "1024"
+
+
+### The number of open tables for all threads. Increasing this value increases the number of file descriptors that mysqld requires. You can check whether you need to increase the table cache by checking the Opened_tables status variable. See Section 5.1.6, “Server Status Variables”. If the value of Opened_tables is large and you do not use FLUSH TABLES often (which just forces all tables to be closed and reopened), then you should increase the value of the table_open_cache variable. For more information about the table cache, see Section 8.4.3.1, “How MySQL Opens and Closes Tables”.
+#
+# 1GB = 2048
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_table_open_cache
+#
+# Default: Autosized
+#
+table_open_cache: "2048"
+
+
+
+
+###### MyISAM
+#
+
+### Index blocks for MyISAM tables are buffered and are shared by all threads. key_buffer_size is the size of the buffer used for index blocks. The key buffer is also known as the key cache. The key_buffer_size is probably the most useful single variable to tweak on the MyISAM engine. Be aware that MyISAM itself caches only indexes, not data. So if possible the value of this setting should cover the size of all your indexes.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_key_buffer_size
+#
+# Default: 16M
+#
+key_buffer_size: "24M"
+
+
+
+### Set the MyISAM storage engine recovery mode.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_myisam-recover-options
+#
+# Default: BACKUP
+#
+# Generates warning in error log
+#
+myisam_recover: BACKUP
+
+
+### External locking is the use of file system locking to manage contention for MyISAM database tables by multiple processes.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/external-locking.html
+#
+# Default: False
+#
+skip_external_locking: skip-external-locking
+
+
+
+###### Caches
+#
+
+### The maximum size of internal in-memory temporary tables. (The actual limit is determined as the minimum of tmp_table_size and max_heap_table_size.) If an in-memory temporary table exceeds the limit, MySQL automatically converts it to an on-disk MyISAM table.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_tmp_table_size
+#
+# Default: 32M
+#
+tmp_table_size: "32M"
+
+
+### This variable sets the maximum size to which user-created MEMORY tables are permitted to grow. The value of the variable is used to calculate MEMORY table MAX_ROWS values.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_max_heap_table_size
+#
+# Default: 32M
+#
+max_heap_table_size: "32M"
+
+
+### The stack size for each thread. Many of the limits detected by the crash-me test are dependent on this value. See Section 8.12.2, “The MySQL Benchmark Suite”. The default of 192KB (256KB for 64-bit systems) is large enough for normal operation. If the thread stack size is too small, it limits the complexity of the SQL statements that the server can handle, the recursion depth of stored procedures, and other memory-consuming actions.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/mysql-benchmarks.html
+#
+# Default: 192KB
+#
+thread_stack: "256KB"
+
+
+
+###### Query cache
+#
+
+### Set the query cache type. Setting the GLOBAL value sets the type for all clients that connect thereafter. Individual clients can set the SESSION value to affect their own use of the query cache. Possible values are shown in the following table.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_query_cache_type
+#
+# Default: 0
+#
+query_cache_type: "0"
+
+
+### If something is going in the query cache it can't be larger then the desired value.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_query_cache_limit
+#
+# Default: 1M
+#
+query_cache_limit: "1M"
+
+
+### The amount of memory allocated for caching query results
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_query_cache_size
+#
+# Default: 16M
+#
+query_cache_size: "16M"
+
+
+
+###### InnoDB
+#
+
+### Force innoDB storage engine.
+#
+# Link: Undocumented.
+#
+# Default: FORCE
+#
+# innodb: FORCE # deprecated
+
+
+### When innodb_strict_mode is ON, InnoDB returns errors rather than warnings for certain conditions. The default value is OFF. Strict mode helps guard against ignored typos and syntax errors in SQL, or other unintended consequences of various combinations of operational modes and SQL statements.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_strict_mode
+#
+# Default: 0
+#
+innodb_strict_mode: "1"
+
+
+### Controls the system calls used to flush data to the InnoDB data files and log files, which can influence I/O throughput. This variable is relevant only for Unix and Linux systems.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_flush_method
+#
+# Default: O_DIRECT
+#
+innodb_flush_method: O_DIRECT
+
+
+### The number of log files in the log group. InnoDB writes to the files in a circular fashion. The default (and recommended) value is 2.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_log_files_in_group
+#
+# Default: 2
+#
+innodb_log_files_in_group: "2"
+
+
+### The size in bytes of each log file in a log group. The combined size of log files (innodb_log_file_size * innodb_log_files_in_group) cannot exceed a maximum value that is slightly less than 512GB.
+#
+## Memory
+##
+## 512MB = 32M
+## 1GB = 64M
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_log_file_size
+#
+# Default: 48M
+#
+#innodb_log_file_size: 1GB
+innodb_log_file_size: "48M"
+
+
+### Controls the balance between strict ACID compliance for commit operations, and higher performance that is possible when commit-related I/O operations are rearranged and done in batches. You can achieve better performance by changing the default value, but then you can lose up to one second worth of transactions in a crash.
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit
+#
+# Default: 1
+#
+innodb_flush_log_at_trx_commit: "1"
+
+
+### When innodb_file_per_table is enabled, InnoDB stores the data and indexes for each newly created table in a separate .ibd file, rather than in the system tablespace. The storage for these InnoDB tables is reclaimed when the tables are dropped or truncated. This setting enables several other InnoDB features, such as table compression. See Section 14.2.5.2, “InnoDB File-Per-Table Mode” for details about such features as well as advantages and disadvantages of using file-per-table tablespaces.
+#
+# Link: https://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_file_per_table
+#
+# Default: 0
+#
+innodb_file_per_table: "1"
+
+
+### The size in bytes of the buffer pool, the memory area where InnoDB caches table and index data.
+#
+## Set to the amount of RAM for the most important data cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+#
+## Memory
+##
+## 512MB = 296M
+## 1GB = 592M
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/innodb-buffer-pool.html
+#
+# Default: 128M
+#
+innodb_buffer_pool_size: 296M
+
+
+
+###### Logs
+#
+### How many days before the logs will expire
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_expire_logs_days
+#
+# Default: 10
+#
+expire_logs_days: "14"
+
+
+### Maximum size of the binary log
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/replication-options-binary-log.html#sysvar_max_binlog_size
+#
+# Default: 100M
+#
+max_binlog_size: "100M"
+
+
+### Location of the mysql error log
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/error-log.html
+#
+# Default: /var/log/mysql/mysql-error.log
+#
+#mysql_error_log: /var/log/mysql/mysql-error.log
+
+
+### Location of the mysql slow query log
+#
+# Link: https://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_slow_query_log
+#
+# Default: /var/log/mysql/mysql-slow.log
+#
+#mysql_slow_query_log: /var/log/mysql/mysql-slow.log

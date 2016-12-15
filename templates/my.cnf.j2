@@ -1,0 +1,86 @@
+### General
+#
+[client]
+port         = {{ mysql_port }}
+socket       = {{ mysql_socket }}
+
+
+[mysqld_safe]
+socket       = {{ mysql_socket }}
+nice         = {{ nice }}
+
+
+[mysqld]
+user                   = {{ mysql_user }}
+pid-file               = {{ mysql_pid }}
+socket                 = {{ mysql_socket }}
+port                   = {{ mysql_port }}
+bind-address           = {{ bind_address }}
+default-storage-engine = {{ default_storage_engine }}
+
+
+### Directories
+#
+datadir      = {{ mysql_datadir }}
+tmpdir       = {{ tmpdir }}
+
+
+### Safety
+#
+max-allowed-packet              = {{ max_allowed_packet }}
+max-connect-errors              = {{ max_connect_errors }}
+sysdate-is-now                  = {{ sysdate_is_now }}
+# explicit_defaults_for_timestamp = {{ explicit_defaults_for_timestamp }}
+# {{ skip_name_resolve }}
+
+
+### Limits
+#
+max-connections        = {{ max_connections }}
+open-files-limit       = {{ open_files_limit }}
+table-definition-cache = {{ table_definition_cache }}
+table-open-cache       = {{ table_open_cache }}
+
+
+### MyISAM
+#
+key_buffer_size        = {{ key_buffer_size }}
+# myisam-recover-options = {{ myisam_recover }}
+{{ skip_external_locking }}
+
+
+### Caches
+#
+tmp-table-size      = {{ tmp_table_size }}
+max-heap-table-size = {{ max_heap_table_size }}
+thread-stack        = {{ thread_stack }}
+thread-cache-size   = {{ thread_cache_size }}
+
+
+### Query cache
+#
+query-cache-type    = {{ query_cache_type }}
+query-cache-limit   = {{ query_cache_limit }}
+query-cache-size    = {{ query_cache_size }}
+
+
+### InnoDB optimization
+#
+innodb-strict-mode             = {{ innodb_strict_mode }}
+innodb-flush-method            = {{ innodb_flush_method }}
+innodb-log-files-in-group      = {{ innodb_log_files_in_group }}
+innodb-log-file-size           = {{ innodb_log_file_size }}
+innodb-flush-log-at-trx-commit = {{ innodb_flush_log_at_trx_commit }}
+innodb-file-per-table          = {{ innodb_file_per_table }}
+innodb-buffer-pool-size        = {{ innodb_buffer_pool_size }}
+
+
+### Logs
+#
+expire-logs-days    = {{ expire_logs_days }}
+max-binlog-size     = {{ max_binlog_size }}
+log-error           = {{ mysql_error_log }}
+slow-query-log-file = {{ mysql_slow_query_log }}
+
+
+!includedir /etc/mysql/conf.d/

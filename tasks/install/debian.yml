@@ -1,0 +1,11 @@
+---
+- name: add percona deb repository
+  apt_repository: repo='deb http://repo.percona.com/apt {{ debian_version_name }} main'
+                  state=present
+                  mode=644
+
+
+- name: add percona deb source repository
+  apt_repository: repo='deb-src http://repo.percona.com/apt {{ debian_version_name }} main'
+                  state=present
+                  mode=644

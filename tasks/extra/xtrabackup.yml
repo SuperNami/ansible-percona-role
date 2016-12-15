@@ -1,0 +1,8 @@
+---
+- name: install latest percona xtrabackup
+  apt: pkg={{ item }}
+       update_cache=yes
+       state=latest
+
+  with_items:
+  - xtrabackup

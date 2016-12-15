@@ -1,0 +1,9 @@
+---
+- name: make new database user
+  mysql_user: name={{ db_user }}
+              password={{ db_user_password }}
+              priv=*.*:ALL
+              login_host={{ mysql_host }}
+              login_user={{ mysql_root_user }}
+              login_password={{ mysql_root_password }}
+              state=present
