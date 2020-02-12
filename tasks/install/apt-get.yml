@@ -6,4 +6,4 @@
 
   with_items:
   - python-mysqldb
-  - percona-server-server
+  - percona-server-server-{{ percona_version }}
