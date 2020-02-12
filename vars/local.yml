@@ -2,7 +2,7 @@
 # User
 user: root
 #user: vagrant
-ubuntu_version_name: vivid
+ubuntu_version_name: bionic
 debian_version_name: jessie
 
 # Mysql host
